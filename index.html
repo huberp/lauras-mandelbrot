@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>p5.js Canvas</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+</head>
+<body>
+    <script>
+        let xmin=-2.5
+        let xmax=1
+        let ymin=-1.5
+        let ymax=1.5
+        let deltax = (xmax - xmin) / 640
+        let deltay = (ymax - ymin) / 640
+        let maxiter= 256
+        function setup() {
+            createCanvas(640, 640);
+            pixelDensity(1);
+            loadPixels();
+
+            for (let xcoord = 0; xcoord < 640; xcoord++) {
+                for (let ycoord = 0; ycoord < 640; ycoord++) {
+                    let a = xmin + xcoord * deltax;
+                    let bi = ymin + ycoord * deltay;
+                    let u = 0;
+                    let v = 0;
+                    let i = 0;
+                    while (u * u + v * v < 4 && i < maxiter) {
+                        let temp = u * u - v * v + a;
+                        v = 2 * u * v + bi;
+                        u = temp;
+                        i = i + 1;
+                    }
+
+                    let idx = (xcoord + ycoord * 640) * 4;
+                    if (i == maxiter) {
+                        pixels[idx] = 0;
+                        pixels[idx + 1] = 0;
+                        pixels[idx + 2] = 0;
+                    } else {
+                        let brightness = map(i, 0, maxiter, 0, 255);
+                        pixels[idx] = i%5*(255/5);
+                        pixels[idx + 1] = 255-(i%4)*64;
+                        pixels[idx + 2] = 50+i/2;
+                    }
+                    pixels[idx + 3] = 255; // alpha
+                }
+            }
+
+            updatePixels();
+            noLoop();
+        }
+
+        function draw() {
+            // rendering is done in setup()
+        }
+    </script>
+</body>
+</html>
