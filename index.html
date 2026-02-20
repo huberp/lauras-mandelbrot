@@ -43,7 +43,7 @@
                         let brightness = map(i, 0, maxiter, 0, 255);
                         pixels[idx] = i%5*(255/5);
                         pixels[idx + 1] = 255-(i%4)*64;
-                        pixels[idx + 2] = 50+i/2;
+                        pixels[idx + 2] = 50+(i%3)*85;
                     }
                     pixels[idx + 3] = 255; // alpha
                 }
