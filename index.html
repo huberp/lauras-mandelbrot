@@ -8,12 +8,12 @@
 </head>
 <body>
     <script>
-        let xmin=-2.5
-        let xmax=1
-        let ymin=-1.5
-        let ymax=1.5
-        let deltax = (xmax - xmin) / 640
-        let deltay = (ymax - ymin) / 640
+        let C_real_min=-2.5
+        let C_real_max=1
+        let C_img_min=-1.5
+        let C_img_max=1.5
+        let delta_C_real = (C_real_max - C_real_min) / 640
+        let delta_C_img = (C_img_max - C_img_min) / 640
         let maxiter= 256
         function setup() {
             createCanvas(640, 640);
@@ -22,8 +22,8 @@
 
             for (let xcoord = 0; xcoord < 640; xcoord++) {
                 for (let ycoord = 0; ycoord < 640; ycoord++) {
-                    let a = xmin + xcoord * deltax;
-                    let bi = ymin + ycoord * deltay;
+                    let a = C_real_min + xcoord * delta_C_real;
+                    let bi = C_img_min + ycoord * delta_C_img;
                     let u = 0;
                     let v = 0;
                     let i = 0;
