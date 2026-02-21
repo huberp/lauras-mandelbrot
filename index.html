@@ -8,7 +8,7 @@
 </head>
 <body>
     <script>
-        let C_real_min=-2.5
+        let C_real_min=-2.0
         let C_real_max=1
         let C_img_min=-1.5
         let C_img_max=1.5
@@ -36,14 +36,15 @@
 
                     let idx = (xcoord + ycoord * 640) * 4;
                     if (i == maxiter) {
+                        //rgb for bound points
                         pixels[idx] = 0;
                         pixels[idx + 1] = 0;
                         pixels[idx + 2] = 0;
                     } else {
-                        let brightness = map(i, 0, maxiter, 0, 255);
-                        pixels[idx] = i%5*(255/5);
-                        pixels[idx + 1] = 255-(i%4)*64;
-                        pixels[idx + 2] = 50+(i%3)*85;
+                        //rgb for escaping points
+                        pixels[idx] = i%4*85;
+                        pixels[idx + 1] = 255-(i%5)*64;
+                        pixels[idx + 2] = 50+(i%6)*40;
                     }
                     pixels[idx + 3] = 255; // alpha
                 }
