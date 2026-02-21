@@ -23,20 +23,30 @@ The **Mandelbrot set** is one of the most famous objects in mathematics. It live
 
 For every point **c** in the complex plane, the following iterative recurrence is applied starting from **z₀ = 0**:
 
-$$z_{n+1} = z_n^2 + c$$
+```math
+z_{n+1} = z_n^2 + c
+```
 
 where both **z** and **c** are complex numbers. A complex number has the form:
 
-$$c = a + bi \quad (a, b \in \mathbb{R},\; i = \sqrt{-1})$$
+```math
+c = a + bi \quad (a, b \in \mathbb{R},\; i = \sqrt{-1})
+```
 
 Squaring a complex number follows the rule:
 
-$$z^2 = (u + vi)^2 = u^2 - v^2 + 2uvi$$
+```math
+z^2 = (u + vi)^2 = u^2 - v^2 + 2uvi
+```
 
 so each iteration expands to:
 
-$$u' = u^2 - v^2 + a$$
-$$v' = 2uv + b$$
+```math
+u' = u^2 - v^2 + a
+```
+```math
+v' = 2uv + b
+```
 
 This is exactly what the renderer computes in its inner loop.
 
