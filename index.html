@@ -42,7 +42,7 @@
                     }
 
                     let idx = (xcoord + ycoord * 640) * 4;
-                    if (escape_iterations == maxiter) {
+                    if (escape_iterations == max_iterations) {
                         //rgb for bound points
                         pixels[idx] = 0;
                         pixels[idx + 1] = 0;
@@ -51,7 +51,7 @@
                         //rgb for escaping points
                         pixels[idx] = escape_iterations%4*85;
                         pixels[idx + 1] = 255-(escape_iterations%5)*64;
-                        pixels[idx + 2] = (escape-iterations%6)*50;
+                        pixels[idx + 2] = (escape_iterations%6)*50;
                     }
                     pixels[idx + 3] = 255; // alpha
                 }
