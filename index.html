@@ -8,43 +8,50 @@
 </head>
 <body>
     <script>
+        //Formula: z[n+1] = z[n]^2 + C
+        //
+        //define extent of complex plane we compute
+        //we split the complex number C into
+        //real and imaginary part
         let C_real_min=-2.0
         let C_real_max=1
         let C_img_min=-1.25
         let C_img_max=1.25
+        //now we want to map the complex C to
+        //canvas resolution of 640x640 pixle
         let delta_C_real = (C_real_max - C_real_min) / 640
         let delta_C_img = (C_img_max - C_img_min) / 640
-        let maxiter= 256
+        let max_iterations = 256
         function setup() {
             createCanvas(640, 640);
             pixelDensity(1);
             loadPixels();
 
             for (let xcoord = 0; xcoord < 640; xcoord++) {
-                let a = C_real_min + xcoord * delta_C_real;
+                let C_real = C_real_min + xcoord * delta_C_real;
                 for (let ycoord = 0; ycoord < 640; ycoord++) {
-                    let bi = C_img_min + ycoord * delta_C_img;
+                    let C_img = C_img_min + ycoord * delta_C_img;
                     let u = 0;
                     let v = 0;
-                    let i = 0;
-                    while (u * u + v * v < 4 && i < maxiter) {
-                        let temp = u * u - v * v + a;
-                        v = 2 * u * v + bi;
+                    let escape_iteration = 0;
+                    while (u * u + v * v < 4 && escape_iterations < max_iterations) {
+                        let temp = u * u - v * v + C_real;
+                        v = 2 * u * v + C_img;
                         u = temp;
-                        i = i + 1;
+                        escape_iterations++;
                     }
 
                     let idx = (xcoord + ycoord * 640) * 4;
-                    if (i == maxiter) {
+                    if (escape_iterations == maxiter) {
                         //rgb for bound points
                         pixels[idx] = 0;
                         pixels[idx + 1] = 0;
                         pixels[idx + 2] = 0;
                     } else {
                         //rgb for escaping points
-                        pixels[idx] = i%4*85;
-                        pixels[idx + 1] = 255-(i%5)*64;
-                        pixels[idx + 2] = 50+(i%6)*40;
+                        pixels[idx] = escape_iterations%4*85;
+                        pixels[idx + 1] = 255-(escape_iterations%5)*64;
+                        pixels[idx + 2] = (escape-iterations%6)*50;
                     }
                     pixels[idx + 3] = 255; // alpha
                 }
