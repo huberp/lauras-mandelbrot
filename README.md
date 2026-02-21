@@ -44,6 +44,7 @@ so each iteration expands to:
 ```math
 u' = u^2 - v^2 + a
 ```
+
 ```math
 v' = 2uv + b
 ```
