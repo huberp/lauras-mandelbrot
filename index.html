@@ -33,7 +33,7 @@
                     let C_img = C_img_min + ycoord * delta_C_img;
                     let u = 0;
                     let v = 0;
-                    let escape_iteration = 0;
+                    let escape_iterations = 0;
                     while (u * u + v * v < 4 && escape_iterations < max_iterations) {
                         let temp = u * u - v * v + C_real;
                         v = 2 * u * v + C_img;
